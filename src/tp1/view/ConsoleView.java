@@ -54,14 +54,14 @@ public class ConsoleView extends GameView {
 		return buffer.toString();
 	}
 	
-	public static String getColName(int num) {
+	public static String colName(int num) {
 		return Integer.toString(num  %100);
 	}
 	public static int colNameToNum(String name) {
         return Integer.parseInt(name);
 	}
 	
-	public static String getRowName(int num) {
+	public static String rowName(int num) {
 		return Integer.toString(num  %100);
 	}
 	public static int rowNameToNum(String name) {
@@ -82,7 +82,7 @@ public class ConsoleView extends GameView {
 		str.append(UPPER_ROW_BORDER);
 
 		for (int row = 0; row < Game.DIM_Y; row++) {
-			str.append(MyStringUtils.right( getRowName(row) , LATERAL_TAB_SIZE) );
+			str.append(MyStringUtils.right( rowName(row) , LATERAL_TAB_SIZE) );
 			str.append(VERTICAL_DELIMITER);
 
 			for (int col = 0; col < Game.DIM_X; col++) {
@@ -90,7 +90,7 @@ public class ConsoleView extends GameView {
 				//str.append(VERTICAL_DELIMITER);
 			}
 			str.append(VERTICAL_DELIMITER);
-			str.append( getRowName(row) );
+			str.append( rowName(row) );
 			str.append(NEW_LINE);
 			//str.append(ROW_BORDER);
 		}
@@ -107,7 +107,7 @@ public class ConsoleView extends GameView {
 		str.append(LATERAL_TAB + SPACE);
 
 		for (int col = 0; col < dimX; col++) {
-			str.append(MyStringUtils.center( getColName(col), CELL_SIZE));
+			str.append(MyStringUtils.center( colName(col), CELL_SIZE));
 		}
 		str.append(NEW_LINE);
 		return str.toString();

@@ -1,28 +1,31 @@
 package tp1.logic;
 
-/**
- * Represents the allowed actions in the game
- *
- */
-public enum Action {
-	LEFT(-1,0), RIGHT(1,0), DOWN(0,1), UP(0,-1), STOP(0,0);
-	
-	private int x;
-	private int y;
-	
-	private Action(int x, int y) {
-		this.x=x;
-		this.y=y;
-	}
-	
-	public int getX() {
-		return x;
-	}
+import tp1.exceptions.ActionParseException;
+import tp1.view.Messages;
 
-	public int getY() {
-		return y;
-	}
-	
-	//TODO fill your code
-	
+public enum Action {
+    LEFT, RIGHT, DOWN, UP, STOP;
+    public static Action parse(String text) throws ActionParseException {
+        Action action = find(text);
+        if (action == null) throw new ActionParseException(Messages.UNKNOWN_ACTION.formatted(text));
+        return action;
+    }
+    public static Action find(String text) {
+        Action action = null;
+        if (text != null) {
+            String upper = text.toUpperCase();
+            if ("LEFT".equals(upper) || "L".equals(upper)) action = LEFT;
+            else if ("RIGHT".equals(upper) || "R".equals(upper)) action = RIGHT;
+            else if ("DOWN".equals(upper) || "D".equals(upper)) action = DOWN;
+            else if ("UP".equals(upper) || "U".equals(upper)) action = UP;
+            else if ("STOP".equals(upper) || "S".equals(upper)) action = STOP;
+        }
+        return action;
+    }
+    public Action opposite() {
+        Action opposite = this;
+        if (this == LEFT) opposite = RIGHT;
+        else if (this == RIGHT) opposite = LEFT;
+        return opposite;
+    }
 }
